@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title color="tertiary">
+      chrono de cuisine
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!--affiche mon chrono a zero avec timeLeftInSeconds-->
+  <div class="time-left">{{ displayTime(timeLeftInSeconds)}}</div>
+  <!--au clic sur le bouton je lance ma fonction startTimer-->
+  
+  <ion-grid>
+    <ion-row>
+      <!--efface mon bouton lancer apres le click grace a ngIf-->
+      <ion-col size="12" *ngIf="!timer">
+      <ion-button class="bouton" expand="block" (click)="startTimer()">
+        <!--fonction tertaine qui affiche mon bouton sur reprendre lors de la mise en pause-->
+        {{timeLeftInSeconds ==0?'lancer':'reprendre'}}
+      </ion-button>
+    </ion-col>
+    <!--ngif permet l'affichage des boutons-->
+      <ion-col *ngIf="timer">
+        <ion-button expand="block" (click)="pauseTimer()">pause</ion-button>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+      </ion-col>
+      <ion-col *ngIf="timer">
+        <ion-button expand="block" (click)="stopTimer()">stop</ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+ 
 </ion-content>
